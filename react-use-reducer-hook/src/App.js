@@ -1,25 +1,41 @@
-import logo from './logo.svg';
+import {useState, useReducer} from 'react';
+import {Container} from 'react-bootstrap';
 import './App.css';
 
+const Slider = () => {
+	const [slide, setSlide] = useState(0);
+	// const [autoplay, setAutoplay] = useState(false);
+	const [autoplay, setAutoplay] = useState(false);
+
+	function changeSlide(i) {
+		setSlide(slide => slide + i);
+	}
+
+	return (
+		<Container>
+			<div className="slider w-50 m-auto">
+				<img className="d-block w-100" src="https://www.planetware.com/wpimages/2020/02/france-in-pictures-beautiful-places-to-photograph-eiffel-tower.jpg" alt="slide" />
+				<div className="text-center mt-5">Active slide {slide} <br/>{autoplay ? 'auto' : null} </div>
+				<div className="buttons mt-3">
+					<button
+						className="btn btn-primary me-2"
+						onClick={() => changeSlide(-1)}>-1</button>
+					<button
+						className="btn btn-primary me-2"
+						onClick={() => changeSlide(1)}>+1</button>
+					<button
+						className="btn btn-primary me-2"
+						onClick={() => setAutoplay(!autoplay)}>toggle autoplay</button>
+				</div>
+			</div>
+		</Container>
+	)
+}
+
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    return (
+        <Slider/>
+    );
 }
 
 export default App;
