@@ -4,11 +4,26 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <mata name='color-scheme' content='light dark'>
+  <meta name="theme-color" media='(prefers-color-scheme: light)' content="#c7cbcc">
+  <meta name="theme-color" media='(prefers-color-scheme: dark)' content="#273a43">
+
+  <script>
+    if(matchMedia('(prefers-color-scheme: dark)').media === 'not all') {
+      document.documentElement.style.display = 'none';
+      document.head.insertAdjacentHTML(
+        'beforeend',
+        '<link rel="stylesheet" href="light.css" onload="document.documentElement.style.display=\'\'">'
+      )
+    }
+  </script>
+
   <title>dark light theme</title>
 
   <link rel="stylesheet" href="css/style.min.css">
 
-  <!-- dark and light theme -->
+  <!--dark and light theme styles-->
   <link rel="stylesheet" href="light.css" media="(prefers-color-scheme: light)">
   <link rel="stylesheet" href="dark.css" media="(prefers-color-scheme: dark)">
 
