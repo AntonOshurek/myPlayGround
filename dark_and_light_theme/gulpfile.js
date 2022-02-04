@@ -102,7 +102,8 @@ const copy = (done) => {
     "source/*.ico",
     "source/img/**/*.svg",
     "source/img/**/*.webp",
-    "!source/img/icons/*.svg",
+    "source/light.css",
+    "source/dark.css",
   ], {
     base: "source"
   })
@@ -110,6 +111,18 @@ const copy = (done) => {
   done();
 }
 exports.copy = copy;
+
+const copyThemeStyles = (done) => {
+  gulp.src([
+    "source/light.css",
+    "source/dark.css",
+  ], {
+    base: "source"
+  })
+    .pipe(gulp.dest("build"))
+  done();
+}
+exports.copy = copyThemeStyles;
 
 //Clean
 const clean = () => {
@@ -141,6 +154,7 @@ const watcher = () => {
   gulp.watch("source/less/**/*.less", gulp.series(styles));
   gulp.watch("source/scripts/**/*.js", gulp.series(script));
   gulp.watch("source/*.html", gulp.series(html, reload));
+  gulp.watch("source/*.css", gulp.series(copyThemeStyles, reload));
 }
 
 // Build
