@@ -2,7 +2,6 @@ const tchemeControl = () => {
   const lightStyles = document.querySelectorAll('link[rel=stylesheet][media*=prefers-color-scheme][media*=light]');
   const darkStyles = document.querySelectorAll('link[rel=stylesheet][media*=prefers-color-scheme][media*=dark]');
   const darkSchemeMedia = matchMedia('(prefers-color-scheme: dark)');
-  // const switcherRadios = document.querySelectorAll('.switcher__radio');
   const fieldset = document.querySelector('.switcher');
 
   function setupSwitcher() {
@@ -13,14 +12,7 @@ const tchemeControl = () => {
       currentRadio.checked = true;
     }
 
-    // [...switcherRadios].forEach((radio) => {
-    //   radio.addEventListener('change', (event) => {
-    //     setScheme(event.target.value);
-    //   });
-    // });
-
     fieldset.addEventListener('change', (evt) => {
-      console.log(evt.target.value);
       setScheme(evt.target.value)
     })
   }
@@ -87,16 +79,6 @@ const tchemeControl = () => {
 
   setupSwitcher();
   setupScheme();
-
-  // const heckChange = () => {
-  //   const fieldset = document.querySelector('.switcher');
-
-  //   fieldset.addEventListener('change', (evt) => {
-  //     console.log(evt.target.value);
-  //   })
-  // }
-
-  // heckChange();
 
 }
 
