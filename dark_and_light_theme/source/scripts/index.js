@@ -1,6 +1,6 @@
-import {test} from './block-1'
+import {tchemeControl} from './tcheme-control'
 
 window.addEventListener('DOMContentLoaded', () => {
-    test();
+  tchemeControl();
 });
 
