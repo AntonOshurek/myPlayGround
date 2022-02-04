@@ -122,7 +122,7 @@ const copyThemeStyles = (done) => {
     .pipe(gulp.dest("build"))
   done();
 }
-exports.copy = copyThemeStyles;
+exports.copyThemeStyles = copyThemeStyles;
 
 //Clean
 const clean = () => {
