@@ -1,4 +1,19 @@
+import { Formik } from 'formik';
+import { useFormik } from 'formik';
 
+const formik = useFormik({
+  initialValues: {
+    Name: '',
+    email: '',
+    amount: '',
+    currency: '',
+    text: '',
+    terms: false
+  },
+  onSubmit: values => {
+    console.log(JSON.stringify(values, null, 2));
+  },
+});
 
 const Form = () => {
   return (
