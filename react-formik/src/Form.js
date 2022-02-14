@@ -1,7 +1,37 @@
-import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { Formik, Form, Field, ErrorMessage, useField } from 'formik';
 import * as Yup from 'yup';
 // https://github.com/jquense/yup
 // https://formik.org/docs/overview
+
+const MyTextInput = ({label, ...props}) => {
+  const [field, meta] = useField(props);
+  return (
+    <>
+      <label className="form__label" htmlFor={props.name}>{label}</label>
+      <input className="form__input" {...props} {...field}/>
+
+      {meta.touched && meta.error ? (
+        <div className='error'>{meta.error}</div>
+      ) : null}
+    </>
+  )
+};
+
+const MyCheckBox = ({children, ...props}) => {
+  const [field, meta] = useField({...props, type: 'checkbox'});
+  return (
+    <>
+      <label className="form__label form__label--checkbox">
+        <input className="form__checkbox" type='checkbox' {...props} {...field}/>
+        {children}
+      </label>
+
+      {meta.touched && meta.error ? (
+        <div className='error'>{meta.error}</div>
+      ) : null}
+    </>
+  )
+};
 
 const CustomForm = () => {
 
@@ -38,20 +68,18 @@ const CustomForm = () => {
     >
       <Form className="form">
         <h2 className="form__title">Отправить пожертвование</h2>
-        <label className="form__label" htmlFor="name">Ваше имя</label>
-        <Field className="form__input"
+        <MyTextInput
+          label='Ваше имя'
           id="name"
           name="name"
           type="text"
         />
-        <ErrorMessage className='error' name='name' component='div'/>
-        <label className="form__label" htmlFor="email">Ваша почта</label>
-        <Field className="form__input"
+        <MyTextInput
+          label='Ваша почта'
           id="email"
           name="email"
           type="email"
         />
-        <ErrorMessage className='error' name='email' component='div'/>
         <label className="form__label" htmlFor="amount">Количество</label>
         <Field className="form__input"
           id="amount"
@@ -64,6 +92,7 @@ const CustomForm = () => {
           id="currency"
           name="currency"
           as='select'>
+          {/* as='' говорит нам какой тип инпута тут будет. по умолчанию ставится обычный input */}
             <option value="">Выберите валюту</option>
             <option value="USD">USD</option>
             <option value="UAH">UAH</option>
@@ -77,13 +106,9 @@ const CustomForm = () => {
           as='textarea'
         />
         <ErrorMessage className='error' name='text' component='div'/>
-        <label className="form__label form__label--checkbox">
-          <Field className="form__checkbox"
-          name="terms"
-          type="checkbox"/>
+        <MyCheckBox name='terms'>
           Соглашаетесь с политикой конфиденциальности?
-        </label>
-        <ErrorMessage className='error' name='terms' component='div'/>
+        </MyCheckBox>
         <button className="form__submit" type="submit">Отправить</button>
       </Form>
     </Formik>
