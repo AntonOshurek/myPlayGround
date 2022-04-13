@@ -1,0 +1,14 @@
+{
+  "name": "dice-avatart",
+  "version": "1.0.0",
+  "description": "avatar",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "avatar"
+  ],
+  "author": "Anton Oshurek",
+  "license": "ISC"
+}
