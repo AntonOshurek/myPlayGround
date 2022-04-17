@@ -49,8 +49,20 @@
     "@babel/polyfill": "^7.12.1",
     "@dicebear/adventurer": "^4.10.2",
     "@dicebear/avatars": "^4.10.2",
+    "@dicebear/avatars-avataaars-sprites": "^4.10.2",
+    "@dicebear/avatars-bottts-sprites": "^4.10.2",
     "@dicebear/avatars-identicon-sprites": "^4.10.2",
     "@dicebear/avatars-male-sprites": "^4.10.2",
-    "@dicebear/big-ears-neutral": "^4.10.2"
+    "@dicebear/big-ears": "^4.10.2",
+    "@dicebear/big-ears-neutral": "^4.10.2",
+    "@dicebear/big-smile": "^4.10.2",
+    "@dicebear/croodles": "^4.10.2",
+    "@dicebear/croodles-neutral": "^4.10.2",
+    "@dicebear/micah": "^4.10.2",
+    "@dicebear/miniavs": "^4.10.2",
+    "@dicebear/open-peeps": "^4.10.2",
+    "@dicebear/personas": "^4.10.2",
+    "@dicebear/pixel-art": "^4.10.2",
+    "@dicebear/pixel-art-neutral": "^4.10.2"
   }
 }
