@@ -1,6 +1,8 @@
 import './App.css';
 import { useState, useEffect } from 'react';
 
+import { Profils } from './profils';
+
 function App() {
 
     const testPropsData = [
@@ -8,6 +10,7 @@ function App() {
         {id: 102, name: 'Viyaleta'},
         {id: 103, name: 'Maksym'},
     ];
+
 
     const [testData, setTestData] = useState(testPropsData);
 
@@ -25,8 +28,8 @@ function App() {
         clearInterval(intervalId);
         setIntervalId(0);
         return;
-      }
-  
+      };
+
       const newIntervalId = setInterval(() => {
         setTimerTime(prevCount => prevCount + 1);
       }, 1000);
@@ -37,15 +40,28 @@ function App() {
         clearInterval(intervalId);
         setIntervalId(0);
         setTimerTime(0);
-    }
+    };
 
     function addCount() {
         setCount(count + 1)
-    }
+    };
 
     function minusCount() {
         setCount( count - 1)
-    }
+    };
+
+    function removeProfil(id) {
+      setTestData(data => {
+        const index = data.findIndex(elem => elem.id === id);
+
+        const before = data.slice(0, index);
+        const after = data.slice(index + 1);
+
+        const newData = [...before, ...after];
+
+        return newData
+      });
+    };
 
   return (
     <div className="app">
@@ -74,18 +90,9 @@ function App() {
             >reset</button>
         </div>
 
-        <ul className='test-data'>
-            {testData.map(item => (
-                <li className='test-data__item' key={item.id}>
-                    <h2 className='test-data__name'>{item.name}</h2>
-                </li>
-            ))}
-
-
-        </ul>
-
+        <Profils profils={testData} removeProfil={removeProfil}/>
     </div>
   );
-}
+};
 
 export default App;
