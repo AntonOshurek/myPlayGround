@@ -37,59 +37,90 @@
     overflow: hidden;
     padding: 1.3rem;
     display: flex;
-  }
+}
 
-  .neumorphic-button {
-    justify-content: space-around;
-    align-items: center;
-    background-color:#e6e7ee;
-    color:#525480;
-    text-decoration:none;
-  }
+.neumorphic-button {
+  justify-content: space-around;
+  align-items: center;
+  background-color:#e6e7ee;
+  color:#525480;
+  text-decoration:none;
+}
 
-  .neumorphic-button:hover {
-    box-shadow: inset 5px 5px 10px 0 rgba(82, 84, 128, 0.3),
-      inset -6px -6px 10px 0 rgba(255, 255, 255, 0.5);
-  }
-  
-  .counter {
-    font-size: 30px;
-    font-weight: bold;
-  }
+.neumorphic-button:hover {
+  box-shadow: inset 5px 5px 10px 0 rgba(82, 84, 128, 0.3),
+    inset -6px -6px 10px 0 rgba(255, 255, 255, 0.5);
+}
 
-  .timer {
-    border: 2px solid #f0f0f0;
-    padding: 10px;
-    display: flex;
-    flex-direction: column;
-    justify-content: start;
-    align-items: center;
-    gap: 20px;
-  }
+.counter {
+  font-size: 30px;
+  font-weight: bold;
+}
 
-  .timer__title {
+.timer {
+  border: 2px solid #f0f0f0;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  gap: 20px;
+}
 
-  }
+.timer__title {
 
-  .timer__time {
-    font-size: 22px;
-    font-weight: bold;
-  }
+}
 
-  .test-data {
-    display: flex;
-    flex-direction: column;
-    justify-content: start;
-    align-items: center;
-  }
+.timer__time {
+  font-size: 22px;
+  font-weight: bold;
+}
 
-  .test-data__item {
-    padding: 10px;
-    border: 1px solid #606060;
-  }
+.test-data {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+}
 
-  .test-data__name {
-    font-size: 20px;
-    font-weight: normal;
-    text-transform: capitalize;
-  }
+.test-data__item {
+  padding: 10px;
+  border: 1px solid #606060;
+}
+
+.test-data__name {
+  font-size: 20px;
+  font-weight: normal;
+  text-transform: capitalize;
+}
+
+.form {
+  width: 100%;
+  padding: 20px;
+  border: 1px solid #606060;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form__title {
+  font-size: 28px;
+  font-weight: 500;
+}
+
+.form__label {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.form__input {
+  width: 200px;
+  height: 30px;
+  padding: 10px;
+}
