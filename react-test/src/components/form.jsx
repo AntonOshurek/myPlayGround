@@ -22,10 +22,19 @@ export default function Form() {
   //   setState({[event.target.name]: event.target.value});
   // }
 
-  const formTemplate = {
-    'name': '',
-    'email': '',
+  const FORM_FIELD_NAME = {
+    NAME: 'name',
+    EMAIL: 'email',
   }
+
+  const EMAIL_REGEX = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+
+  const formTemplate = {
+    [FORM_FIELD_NAME.NAME]: '',
+    [FORM_FIELD_NAME.EMAIL]: '',
+  }
+
+
 
   const [form, setForm] = useState(formTemplate)
 
@@ -43,21 +52,28 @@ export default function Form() {
     )
   }
 
+  const validateEmail = () => {
+    if(!EMAIL_REGEX.test(form[FORM_FIELD_NAME.EMAIL]) && form[FORM_FIELD_NAME.EMAIL].trim() !== '') {
+      alert('invalid email')
+    }
+  }
+
   return(
     <form className="form">
       <h2 className="form__title">Super Form</h2>
       <label className="form__label">
         Name
-        <input className="form__input" type="text" name='name'
+        <input className="form__input" type="text" name={FORM_FIELD_NAME.NAME}
           value={form.name}
           onChange={handleChange}
         />
       </label>
       <label className="form__label">
         Email
-        <input className="form__input" type="text" name='email'
+        <input className="form__input" type="text" name={FORM_FIELD_NAME.EMAIL}
         value={form.email}
         onChange={handleChange}
+        onBlur={validateEmail}
         />
       </label>
     </form>
