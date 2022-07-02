@@ -7,7 +7,7 @@ export function Profils(props) {
   return (
     <ul className='test-data'>
       {profils.map(profil => (
-        <Profil name={profil.name} id={profil.id} key={profil.id} removeProfil={removeProfil}/>
+        <Profil name={profil.name} id={profil.id} removeProfil={removeProfil} key={profil.id}/>
       ))}
     </ul>
   )

@@ -2,6 +2,7 @@ import './App.css';
 import { useState, useEffect } from 'react';
 
 import { Profils } from './profils';
+import Form from './components/form';
 
 function App() {
 
@@ -89,6 +90,8 @@ function App() {
             onClick={timerReset}
             >reset</button>
         </div>
+
+        <Form />
 
         <Profils profils={testData} removeProfil={removeProfil}/>
     </div>
