@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 
 import { Profils } from './profils';
 import Form from './components/form';
+import SubscribeForm from './components/subscribe-form';
 
 function App() {
 
@@ -92,6 +93,7 @@ function App() {
         </div>
 
         <Form />
+        <SubscribeForm />
 
         <Profils profils={testData} removeProfil={removeProfil}/>
     </div>
