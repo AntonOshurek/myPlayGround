@@ -58,7 +58,11 @@ export default function SubscribeForm() {
       return;
     }
 
-    setNewState('status', 'subscribe success!');
+    setSubscribe({
+      'email': '',
+      'agree': false,
+      'status': 'subscribe success!',
+    });
   }
 
   return(
