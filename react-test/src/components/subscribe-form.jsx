@@ -1,5 +1,5 @@
 import './subscribe-form.css';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 export default function SubscribeForm() {
 
@@ -8,11 +8,24 @@ export default function SubscribeForm() {
   const subscribeStateTemplate = {
     'email': '',
     'agree': false,
+    'card': '',
     'status': '',
   };
 
   const [subscribe, setSubscribe] = useState(subscribeStateTemplate);
   const [emailError, setEmailError] = useState('');
+  const refEmailInput = useRef(null);
+  const refCardInput = useRef(null);
+
+  useEffect(() => {
+    refCardInput.current.focus();
+  }, []);
+
+  useEffect(() => {
+    if(subscribe.card.length === 14) {
+      refEmailInput.current.focus();
+    }
+  }, [subscribe.card]);
 
   const setNewState = (name, value) => {
     setSubscribe(
@@ -38,7 +51,7 @@ export default function SubscribeForm() {
     validateEmail();
   }, [subscribe.email]);
 
-  const handleEmailChange = (evt) => {
+  const handleFormChange = (evt) => {
     setNewState(evt.target.name, evt.target.value);
   }
 
@@ -69,10 +82,19 @@ export default function SubscribeForm() {
     <form className="subscribe">
       <h2 className="subscribe__title">Subscribe form</h2>
       <label className="subscribe__label">
+        Your card number
+        <input className="subscribe__input" type="number" name='card'
+          value={subscribe.card}
+          onInput={handleFormChange}
+          ref={refCardInput}
+        />
+      </label>
+      <label className="subscribe__label">
         Your Email
         <input className="subscribe__input" type="text" name='email'
           value={subscribe.email}
-          onInput={handleEmailChange}
+          onInput={handleFormChange}
+          ref={refEmailInput}
         />
         <span className='subscribe__error subscribe__error--email'>{emailError ? emailError : ''}</span>
       </label>
