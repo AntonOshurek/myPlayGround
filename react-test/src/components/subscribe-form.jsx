@@ -1,5 +1,5 @@
 import './subscribe-form.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export default function SubscribeForm() {
 
@@ -27,18 +27,19 @@ export default function SubscribeForm() {
   }
 
   const validateEmail = () => {
-    if(!EMAIL_REGEX.test(subscribe.email) && subscribe.email.trim() !== '') {
+    if(!EMAIL_REGEX.test(subscribe.email.toLocaleLowerCase()) && subscribe.email.trim() !== '') {
       setEmailError('invalid Email address!');
-    }
-
-    if(EMAIL_REGEX.test(subscribe.email)) {
+    } else {
       setEmailError('');
     }
   }
 
+  useEffect(() => {
+    validateEmail();
+  }, [subscribe.email]);
+
   const handleEmailChange = (evt) => {
     setNewState(evt.target.name, evt.target.value);
-    validateEmail();
   }
 
   const handleAgreeChange = (evt) => {
@@ -67,9 +68,9 @@ export default function SubscribeForm() {
         Your Email
         <input className="subscribe__input" type="text" name='email'
           value={subscribe.email}
-          onChange={handleEmailChange}
+          onInput={handleEmailChange}
         />
-        <span className='subscribe__error subscribe__error--email'>{emailError}</span>
+        <span className='subscribe__error subscribe__error--email'>{emailError ? emailError : ''}</span>
       </label>
       <label className="subscribe__label">
         I agree with terms and conditions
