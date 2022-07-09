@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 
 import { MovieList } from '../components/movie-list';
+import { Preloader } from '../components/preloader';
 
 function Main() {
   const [movies, setMovies] = useState([]);
@@ -25,20 +26,18 @@ function Main() {
   if (error) {
     return <div>Ошибка: {error.message}</div>;
   } else if (!isLoaded) {
-    return <div>Загрузка...</div>;
+    return (
+      <main className='main'>
+        <Preloader />
+      </main>
+    );
   } else {
     return (
-      <MovieList movies={movies.Search}/>
+      <main className='main'>
+        <MovieList movies={movies.Search}/>
+      </main>
     );
   }
-
-  // return(
-  //   <main className="main container">
-  //     {
-  //       movies.length ? <MovieList movies={movies}/> : <span>Loading...</span>
-  //     }
-  //   </main>
-  // )
 }
 
 export { Main }
