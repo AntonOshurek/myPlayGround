@@ -4,25 +4,37 @@ import { MovieList } from '../components/movie-list';
 import { Preloader } from '../components/preloader';
 import { Search } from '../components/search';
 
+const apiLink = 'http://www.omdbapi.com/?apikey=3179f694&s=';
+const apiBasicSearch = 'matrix'
+
 function Main() {
   const [movies, setMovies] = useState([]);
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
 
+  const search = (searchKey) => {
+    fetch(`${apiLink}${searchKey}`)
+    .then(res => res.json())
+    .then(
+      (result) => {
+        setIsLoaded(true);
+        setMovies(result);
+      },
+      (error) => {
+        setIsLoaded(true);
+        setError(error);
+      }
+    )
+  }
+
   useEffect(() => {
-    fetch('http://www.omdbapi.com/?apikey=3179f694&s=matrix')
-      .then(res => res.json())
-      .then(
-        (result) => {
-          setIsLoaded(true);
-          setMovies(result);
-        },
-        (error) => {
-          setIsLoaded(true);
-          setError(error);
-        }
-      )
+    search(apiBasicSearch);
   }, []);
+
+  const newSearch = (name) => {
+    console.log(name);
+    search(name);
+  }
 
   if (error) {
     return <div>Ошибка: {error.message}</div>;
@@ -35,7 +47,7 @@ function Main() {
   } else {
     return (
       <main className='main'>
-        <Search />
+        <Search newSearch={newSearch}/>
         <MovieList movies={movies.Search}/>
       </main>
     );

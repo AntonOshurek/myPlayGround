@@ -1,6 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useEffect ,useState } from 'react';
 
-function Search() {
+function Search(props) {
+  const { newSearch } = props;
 
   const [search, setSearch] = useState('');
 
@@ -11,7 +12,7 @@ function Search() {
   return(
     <div className="search">
       <input id="email_inline" type="text" className="validate search__input" placeholder="Search" value={search} onChange={onSearchChange}/>
-      <button className='search__button' type='button'>search</button>
+      <button className='search__button' type='button' onClick={() => newSearch(search)}>search</button>
     </div>
   )
 }
