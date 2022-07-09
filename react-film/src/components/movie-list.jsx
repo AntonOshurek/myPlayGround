@@ -18,7 +18,7 @@ function MovieList(props) {
   console.log(movies)
 
   return(
-    <ul className='movieList'>
+    <ul className='movieList browser-default'>
       {transformingMovies.map((movie) => {
         return <Movie key={movie.id} {...movie}/>
       })}

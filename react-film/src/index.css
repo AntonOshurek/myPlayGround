@@ -31,18 +31,15 @@ body {
 }
 
 .movieList {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: 10px;
-  padding: 40px 20px;
+  padding: 20px;
 }
 
 .movie-card {
   padding: 0;
   margin: 0;
-  width: 300px;
   background-color: aliceblue;
 
   display: flex;
@@ -55,14 +52,26 @@ body {
   background-color: aliceblue;
   object-fit: contain;
   width: 100%;
-  height: 350px;
+  height: 400px;
 
   display: flex;
 }
 
+.movie-card__no-image {
+  display: block;
+  width: 100%;
+  height: 400px;
+  background-color: grey;
+  color: #f5f5f5;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .movie-card__info {
   width: 100%;
-  height: 100%;
+  height: min-content;
   display: flex;
   flex-direction: column;
   align-items: center;
