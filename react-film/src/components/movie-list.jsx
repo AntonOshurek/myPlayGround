@@ -7,6 +7,7 @@ const apiAdapter = (filmsArray) => {
       year: film.Year,
       id: film.imdbID,
       poster: film.Poster,
+      type: film.Type,
     }
   })
 }
@@ -14,6 +15,7 @@ const apiAdapter = (filmsArray) => {
 function MovieList(props) {
   const { movies } = props;
   const transformingMovies = apiAdapter(movies);
+  console.log(movies)
 
   return(
     <ul className='movieList'>

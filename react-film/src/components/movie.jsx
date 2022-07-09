@@ -2,14 +2,12 @@ function Movie(props) {
   const {title, year, id, type, poster} = props;
 
   return(
-    <li className="card movie" id={id}>
-      <div className="card-image waves-effect waves-block waves-light">
-        <img className="activator movie__image" src={poster} />
-      </div>
-      <div className="card-content">
-        <span className="card-title activator grey-text text-darken-4">{title}</span>
-        <p>{year}</p>
-        <p>{type}</p>
+    <li className="movie-card" id={id}>
+      <img className="movie-card__image" src={poster} />
+      <div className="movie-card__info">
+        <h2 className="movie-card__title">{title}</h2>
+        <p className="movie-card__year">{year}</p>
+        <p className="movie-card__type">{type}</p>
       </div>
     </li>
   );
