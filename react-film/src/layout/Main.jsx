@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 
 import { MovieList } from '../components/movie-list';
 import { Preloader } from '../components/preloader';
+import { Search } from '../components/search';
 
 function Main() {
   const [movies, setMovies] = useState([]);
@@ -34,6 +35,7 @@ function Main() {
   } else {
     return (
       <main className='main'>
+        <Search />
         <MovieList movies={movies.Search}/>
       </main>
     );
