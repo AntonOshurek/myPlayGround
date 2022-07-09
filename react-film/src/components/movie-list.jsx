@@ -15,7 +15,6 @@ const apiAdapter = (filmsArray) => {
 function MovieList(props) {
   const { movies } = props;
   const transformingMovies = apiAdapter(movies);
-  console.log(movies)
 
   return(
     <ul className='movieList browser-default'>
