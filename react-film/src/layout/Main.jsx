@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { MovieList } from '../components/movie-list';
 import { Preloader } from '../components/preloader';
 import { Search } from '../components/search';
+import { Filter } from '../components/filter';
 
 const apiLink = 'http://www.omdbapi.com/?apikey=3179f694&s=';
 const apiBasicSearch = 'matrix'
@@ -48,6 +49,7 @@ function Main() {
     return (
       <main className='main'>
         <Search newSearch={newSearch}/>
+        <Filter />
         <MovieList movies={movies.Search}/>
       </main>
     );
