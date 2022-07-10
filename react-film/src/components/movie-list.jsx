@@ -15,10 +15,10 @@ const apiAdapter = (filmsArray) => {
 function MovieList(props) {
   const { movies } = props;
 
-  if(!movies) {
-    return <div>Фильм не найден или произошла ошибка получения данных</div>
+  if(!movies.Search) {
+    return <div>{movies.Error}</div>
   } else {
-    const transformingMovies = apiAdapter(movies);
+    const transformingMovies = apiAdapter(movies.Search);
     return(
       <ul className='movieList browser-default'>
         {transformingMovies.map((movie) => {

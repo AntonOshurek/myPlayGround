@@ -4,6 +4,8 @@ const FILTER_TYPES = {
   SERIES: 'series',
 };
 
-const API_LINK = 'http://www.omdbapi.com/?apikey=3179f694&s=';
+const API_KEY = process.env.REACT_APP_API_KEY;
+
+const API_LINK = `http://www.omdbapi.com/?apikey=${API_KEY}=`;
 
 export { FILTER_TYPES, API_LINK };

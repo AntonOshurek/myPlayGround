@@ -21,6 +21,7 @@ function Main() {
       if(result) {
         setIsLoaded(true);
         setMovies(result);
+        console.log(result)
       }
     }).catch((error) => {
       console.error(error);
@@ -49,7 +50,7 @@ function Main() {
     <main className='main'>
       <Search setNewSearch={setNewSearch}/>
       <Filter setNewFilter={setNewFilter}/>
-      {!isLoaded ? <Preloader /> : <MovieList movies={movies.Search}/>}
+      {!isLoaded ? <Preloader /> : <MovieList movies={movies}/>}
     </main>
   );
 
