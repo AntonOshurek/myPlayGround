@@ -33,6 +33,7 @@ function Main() {
   }, []);
 
   useEffect(() => {
+    setIsLoaded(false)
     getData();
   }, [searchParams]);
 
