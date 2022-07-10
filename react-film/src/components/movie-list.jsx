@@ -23,7 +23,20 @@ function MovieList(props) {
         return <Movie key={movie.id} {...movie}/>
       })}
     </ul>
-  )
+    )
+
+  // if(movies.length === 0 ) {
+  //   return(<p>нет фильмов</p>)
+  // } else {
+  //   const transformingMovies = apiAdapter(movies);
+  //   return(
+  //   <ul className='movieList browser-default'>
+  //     {transformingMovies.map((movie) => {
+  //       return <Movie key={movie.id} {...movie}/>
+  //     })}
+  //   </ul>
+  //   )
+  // }
 };
 
 export { MovieList };

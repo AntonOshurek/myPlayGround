@@ -5,6 +5,8 @@ import { Preloader } from '../components/preloader';
 import { Search } from '../components/search';
 import { Filter } from '../components/filter';
 
+import { api } from '../api/api';
+
 import { FILTER_TYPES, API_LINK } from '../utils/consts';
 
 function Main() {
@@ -12,42 +14,38 @@ function Main() {
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
 
-  const [searchText, setSearchText] = useState('matrix');
-  const [filterType, setFilterType] = useState(FILTER_TYPES.ALL);
+  const [searchParams, setSearchParams] = useState({
+    search: 'matrix',
+    filter: '',
+  });
 
-  const search = () => {
-    fetch(`${API_LINK}${searchText}&type=${filterType === FILTER_TYPES.ALL ? '' : filterType}`)
-    .then(res => res.json())
-    .then(
-      (result) => {
+  const getData = () => {
+    api(searchParams.search, searchParams.filter).then((result) => {
+      if(result) {
         setIsLoaded(true);
         setMovies(result);
-      },
-      (error) => {
-        setIsLoaded(true);
-        setError(error);
       }
-    )
+    }).catch((err) => {
+      setIsLoaded(true);
+      setError(error);
+      console.log(`ошибка сервера - ${err}`);
+    });
   }
 
   useEffect(() => {
-    search();
+    getData();
   }, []);
 
   useEffect(() => {
-    search();
-  }, [searchText]);
+    getData();
+  }, [searchParams]);
 
-  useEffect(() => {
-    search();
-  }, [filterType]);
-
-  const setNewSearch = (name) => {
-    setSearchText(name);
+  const setNewSearch = (searchName) => {
+    setSearchParams(() => ({...searchParams, search: searchName}));
   };
 
   const setNewFilter = (filterName) => {
-    setFilterType(filterName);
+    setSearchParams(() => ({...searchParams, filter: filterName}));
   };
 
   if (error) {
