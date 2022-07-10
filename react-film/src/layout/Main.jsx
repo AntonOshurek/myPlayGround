@@ -5,55 +5,55 @@ import { Preloader } from '../components/preloader';
 import { Search } from '../components/search';
 import { Filter } from '../components/filter';
 
-const apiLink = 'http://www.omdbapi.com/?apikey=3179f694&s=';
-const apiBasicSearch = 'matrix'
+import { api } from '../api/api';
 
 function Main() {
   const [movies, setMovies] = useState([]);
-  const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
 
-  const search = (searchKey) => {
-    fetch(`${apiLink}${searchKey}`)
-    .then(res => res.json())
-    .then(
-      (result) => {
+  const [searchParams, setSearchParams] = useState({
+    search: 'matrix',
+    filter: '',
+  });
+
+  const getData = () => {
+    api(searchParams.search, searchParams.filter).then((result) => {
+      if(result) {
         setIsLoaded(true);
         setMovies(result);
-      },
-      (error) => {
-        setIsLoaded(true);
-        setError(error);
+        console.log(result)
       }
-    )
+    }).catch((error) => {
+      console.error(error);
+      setIsLoaded(true);
+    });
   }
 
   useEffect(() => {
-    search(apiBasicSearch);
+    getData();
   }, []);
 
-  const newSearch = (name) => {
-    console.log(name);
-    search(name);
-  }
+  useEffect(() => {
+    setIsLoaded(false)
+    getData();
+  }, [searchParams]);
 
-  if (error) {
-    return <div>Ошибка: {error.message}</div>;
-  } else if (!isLoaded) {
-    return (
-      <main className='main'>
-        <Preloader />
-      </main>
-    );
-  } else {
-    return (
-      <main className='main'>
-        <Search newSearch={newSearch}/>
-        <Filter />
-        <MovieList movies={movies.Search}/>
-      </main>
-    );
-  }
+  const setNewSearch = (searchName) => {
+    setSearchParams(() => ({...searchParams, search: searchName}));
+  };
+
+  const setNewFilter = (filterName) => {
+    setSearchParams(() => ({...searchParams, filter: filterName}));
+  };
+
+  return (
+    <main className='main'>
+      <Search setNewSearch={setNewSearch}/>
+      <Filter setNewFilter={setNewFilter}/>
+      {!isLoaded ? <Preloader /> : <MovieList movies={movies}/>}
+    </main>
+  );
+
 }
 
 export { Main }

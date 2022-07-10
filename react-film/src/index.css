@@ -28,11 +28,10 @@ body {
 .main {
   width: 100%;
   height: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  justify-content: center;
-  align-items: center;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: min-content min-content 1fr;
+  justify-items: center;
 }
 
 .movieList {
@@ -46,8 +45,7 @@ body {
 
 .movie-card {
   padding: 0;
-  margin: 0;
-  background-color: aliceblue;
+  box-shadow: 2px 2px 5px 2px grey;
 
   display: flex;
   flex-direction: column;
@@ -56,7 +54,6 @@ body {
 }
 
 .movie-card__image {
-  background-color: aliceblue;
   object-fit: contain;
   width: 100%;
   height: 400px;
@@ -102,6 +99,17 @@ body {
 }
 
 .preloader {
+  height: min-content;
+  width: min-content;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  padding: 40px 0;
+}
+
+.preloader__progress {
   max-width: 300px;
   min-width: 240px;
 }

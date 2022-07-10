@@ -1,8 +1,12 @@
 function Preloader() {
   return(
-    <div className="progress preloader">
-      <div className="indeterminate"></div>
-  </div>
+    <div className="preloader">
+      <p>loading...</p>
+      <div className="progress preloader__progress">
+        <div className="indeterminate"></div>
+      </div>
+    </div>
+
   )
 }
 

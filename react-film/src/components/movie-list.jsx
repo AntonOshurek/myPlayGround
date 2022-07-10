@@ -14,15 +14,19 @@ const apiAdapter = (filmsArray) => {
 
 function MovieList(props) {
   const { movies } = props;
-  const transformingMovies = apiAdapter(movies);
 
-  return(
-    <ul className='movieList browser-default'>
-      {transformingMovies.map((movie) => {
-        return <Movie key={movie.id} {...movie}/>
-      })}
-    </ul>
-  )
+  if(!movies.Search) {
+    return <div>{movies.Error}</div>
+  } else {
+    const transformingMovies = apiAdapter(movies.Search);
+    return(
+      <ul className='movieList browser-default'>
+        {transformingMovies.map((movie) => {
+          return <Movie key={movie.id} {...movie}/>
+        })}
+      </ul>
+      )
+  }
 };
 
 export { MovieList };
