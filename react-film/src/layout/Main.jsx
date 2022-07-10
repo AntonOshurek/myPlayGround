@@ -7,11 +7,8 @@ import { Filter } from '../components/filter';
 
 import { api } from '../api/api';
 
-import { FILTER_TYPES, API_LINK } from '../utils/consts';
-
 function Main() {
   const [movies, setMovies] = useState([]);
-  const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
 
   const [searchParams, setSearchParams] = useState({
@@ -25,10 +22,9 @@ function Main() {
         setIsLoaded(true);
         setMovies(result);
       }
-    }).catch((err) => {
+    }).catch((error) => {
+      console.error(error);
       setIsLoaded(true);
-      setError(error);
-      console.log(`ошибка сервера - ${err}`);
     });
   }
 
@@ -48,23 +44,14 @@ function Main() {
     setSearchParams(() => ({...searchParams, filter: filterName}));
   };
 
-  if (error) {
-    return <div>Ошибка: {error.message}</div>;
-  } else if (!isLoaded) {
-    return (
-      <main className='main'>
-        <Preloader />
-      </main>
-    );
-  } else {
-    return (
-      <main className='main'>
-        <Search setNewSearch={setNewSearch}/>
-        <Filter setNewFilter={setNewFilter}/>
-        <MovieList movies={movies.Search}/>
-      </main>
-    );
-  }
+  return (
+    <main className='main'>
+      <Search setNewSearch={setNewSearch}/>
+      <Filter setNewFilter={setNewFilter}/>
+      {!isLoaded ? <Preloader /> : <MovieList movies={movies.Search}/>}
+    </main>
+  );
+
 }
 
 export { Main }
