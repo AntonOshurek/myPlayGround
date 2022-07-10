@@ -47,7 +47,8 @@ body {
 .movie-card {
   padding: 0;
   margin: 0;
-  background-color: aliceblue;
+  /* background-color: aliceblue; */
+  box-shadow: 2px 2px 5px 2px grey;
 
   display: flex;
   flex-direction: column;
@@ -56,7 +57,7 @@ body {
 }
 
 .movie-card__image {
-  background-color: aliceblue;
+  /* background-color: aliceblue; */
   object-fit: contain;
   width: 100%;
   height: 400px;

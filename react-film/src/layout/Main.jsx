@@ -5,16 +5,18 @@ import { Preloader } from '../components/preloader';
 import { Search } from '../components/search';
 import { Filter } from '../components/filter';
 
-const apiLink = 'http://www.omdbapi.com/?apikey=3179f694&s=';
-const apiBasicSearch = 'matrix'
+import { FILTER_TYPES, API_LINK } from '../utils/consts';
 
 function Main() {
   const [movies, setMovies] = useState([]);
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
 
-  const search = (searchKey) => {
-    fetch(`${apiLink}${searchKey}`)
+  const [searchText, setSearchText] = useState('matrix');
+  const [filterType, setFilterType] = useState(FILTER_TYPES.ALL);
+
+  const search = () => {
+    fetch(`${API_LINK}${searchText}&type=${filterType === FILTER_TYPES.ALL ? '' : filterType}`)
     .then(res => res.json())
     .then(
       (result) => {
@@ -29,13 +31,24 @@ function Main() {
   }
 
   useEffect(() => {
-    search(apiBasicSearch);
+    search();
   }, []);
 
-  const newSearch = (name) => {
-    console.log(name);
-    search(name);
-  }
+  useEffect(() => {
+    search();
+  }, [searchText]);
+
+  useEffect(() => {
+    search();
+  }, [filterType]);
+
+  const setNewSearch = (name) => {
+    setSearchText(name);
+  };
+
+  const setNewFilter = (filterName) => {
+    setFilterType(filterName);
+  };
 
   if (error) {
     return <div>Ошибка: {error.message}</div>;
@@ -48,8 +61,8 @@ function Main() {
   } else {
     return (
       <main className='main'>
-        <Search newSearch={newSearch}/>
-        <Filter />
+        <Search setNewSearch={setNewSearch}/>
+        <Filter setNewFilter={setNewFilter}/>
         <MovieList movies={movies.Search}/>
       </main>
     );
