@@ -15,22 +15,22 @@ function Filter(props) {
   };
 
   return(
-    <form className="filter" onChange={handleFilter}>
+    <form className="filter">
       <p>
         <label>
-          <input name="type" type="radio" data-type={FILTER_TYPES.ALL}/>
+          <input name="type" type="radio" data-type={FILTER_TYPES.ALL} onChange={handleFilter} checked={filterType === FILTER_TYPES.ALL}/>
           <span>All</span>
         </label>
       </p>
       <p>
         <label>
-          <input name="type" type="radio" data-type={FILTER_TYPES.MOVIE}/>
+          <input name="type" type="radio" data-type={FILTER_TYPES.MOVIE} onChange={handleFilter} checked={filterType === FILTER_TYPES.MOVIE}/>
           <span>Movies only</span>
         </label>
       </p>
       <p>
         <label>
-          <input name="type" type="radio"  data-type={FILTER_TYPES.SERIES}/>
+          <input name="type" type="radio"  data-type={FILTER_TYPES.SERIES} onChange={handleFilter} checked={filterType === FILTER_TYPES.SERIES}/>
           <span>Series only</span>
         </label>
       </p>
