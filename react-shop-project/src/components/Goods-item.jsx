@@ -8,6 +8,14 @@ export const GoodsItem = ({item}) => {
     displayAssets,
   } = item;
 
+  const bg = displayAssets[0].background;
+
+  console.log(bg)
+
+  const cardRevalStyle = {
+    backgroundImage: `url("${ displayAssets[0].background }")`,
+  };
+
   return(
     <div className="card">
       <div className="card-image waves-effect waves-block waves-light">
@@ -19,9 +27,11 @@ export const GoodsItem = ({item}) => {
         <p className="card__price">{price.finalPrice}</p>
         <button className="card__button" type="button">Купить</button>
       </div>
-      <div className="card-reveal">
-        <span className="card-title grey-text text-darken-4">Описание<i className="material-icons right">close</i></span>
-        <p className="card__description">{displayDescription ? displayDescription : 'Описание отсутствует!'}</p>
+      <div className="card-reveal" >
+        <div className="card-reveal__wrap" style={cardRevalStyle}>
+          <span className="card-title ">Описание<i className="material-icons right">close</i></span>
+          <p className="card__description">{displayDescription ? displayDescription : 'Описание отсутствует!'}</p>
+        </div>
       </div>
     </div>
   );

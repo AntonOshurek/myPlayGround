@@ -9,6 +9,20 @@
   font-weight: 400;
 }
 
+.card-reveal {
+  padding: 0 !important;
+}
+
+.card-reveal__wrap {
+  height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: #fff;
+  padding: 20px;
+  font-size: 22px;
+}
+
 .card__price {
   font-size: 22px;
   font-weight: bold;
