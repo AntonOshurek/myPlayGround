@@ -18,14 +18,13 @@ export const Shop = () => {
     }).then(response => response.json())
     .then((data) => {
       setGoods(data.shop);
-      // console.log(data.shop[1].)
       setLoading(false);
     })
   }, []);
 
   return(
     <section className="shop container">
-      <h2>Shop</h2>
+      <h2>Магазин</h2>
 
       {
         loading ? <Preloader /> : <GoodsList goods={goods}/>
