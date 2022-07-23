@@ -1,5 +1,9 @@
+import { Shop } from './Shop';
+
 export const Main = () => {
   return(
-    <main></main>
+    <main>
+      <Shop />
+    </main>
   );
 };
