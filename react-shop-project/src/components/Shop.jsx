@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
-
 import {API_KEY, API_URL} from '../config';
 
+import { GoodsList } from './Goods-list';
 import { Preloader } from './Preloader';
 
 import './shop.css';
@@ -17,8 +17,8 @@ export const Shop = () => {
       },
     }).then(response => response.json())
     .then((data) => {
-      data.featured && setGoods(data.shop);
-      console.log(data.shop)
+      setGoods(data.shop);
+      // console.log(data.shop[1].)
       setLoading(false);
     })
   }, []);
@@ -28,7 +28,7 @@ export const Shop = () => {
       <h2>Shop</h2>
 
       {
-        loading ? <Preloader /> : 'Goods'
+        loading ? <Preloader /> : <GoodsList goods={goods}/>
       }
     </section>
   )
