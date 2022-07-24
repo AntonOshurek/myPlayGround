@@ -3,12 +3,14 @@ import {API_KEY, API_URL} from '../config';
 
 import { GoodsList } from './Goods-list';
 import { Preloader } from './Preloader';
+import { Cart } from './Cart';
 
 import './shop.css';
 
 export const Shop = () => {
   const [goods, setGoods] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [order, setOrder] = useState([]);
 
   useEffect(() => {
     fetch(API_URL, {
@@ -25,7 +27,7 @@ export const Shop = () => {
   return(
     <section className="shop container">
       <h2>Магазин</h2>
-
+      <Cart quantity={order.length}/>
       {
         loading ? <Preloader /> : <GoodsList goods={goods}/>
       }
