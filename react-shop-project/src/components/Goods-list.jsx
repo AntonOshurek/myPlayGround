@@ -1,5 +1,4 @@
 import { GoodsItem } from "./Goods-item";
-
 import './goods-list.css';
 
 export const GoodsList = (props) => {

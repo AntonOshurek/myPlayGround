@@ -8,10 +8,6 @@ export const GoodsItem = ({item}) => {
     displayAssets,
   } = item;
 
-  const bg = displayAssets[0].background;
-
-  console.log(bg)
-
   const cardRevalStyle = {
     backgroundImage: `url("${ displayAssets[0].background }")`,
   };
