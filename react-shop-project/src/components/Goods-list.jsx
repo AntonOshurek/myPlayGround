@@ -3,7 +3,7 @@ import './goods-list.css';
 
 export const GoodsList = (props) => {
 
-  const {goods = []} = props;
+  const {goods = [], addToCart} = props;
 
   if(!goods.length) {
     return(
@@ -15,7 +15,7 @@ export const GoodsList = (props) => {
     <ul className="goods-list">
       {
         goods.map((item) => {
-          return <GoodsItem item={item} key={item.mainId}/>
+          return <GoodsItem item={item} key={item.mainId} addToCart={addToCart}/>
         })
       }
     </ul>

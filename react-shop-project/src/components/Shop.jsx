@@ -12,6 +12,16 @@ export const Shop = () => {
   const [loading, setLoading] = useState(true);
   const [order, setOrder] = useState([]);
 
+  const addToCart = (item) => {
+    console.log(item);
+
+    setOrder((prevOrder) => [...prevOrder, item]);
+  };
+
+  useEffect(() => {
+    console.log(order)
+  }, [order])
+
   useEffect(() => {
     fetch(API_URL, {
       headers: {
@@ -29,7 +39,7 @@ export const Shop = () => {
       <h2>Магазин</h2>
       <Cart quantity={order.length}/>
       {
-        loading ? <Preloader /> : <GoodsList goods={goods}/>
+        loading ? <Preloader /> : <GoodsList goods={goods} addToCart={addToCart}/>
       }
     </section>
   )

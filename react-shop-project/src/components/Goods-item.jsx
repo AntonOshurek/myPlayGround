@@ -1,4 +1,4 @@
-export const GoodsItem = ({item}) => {
+export const GoodsItem = ({item, addToCart}) => {
 
   const {
     displayName,
@@ -21,7 +21,9 @@ export const GoodsItem = ({item}) => {
         <span className="card-title activator grey-text text-darken-4">{displayName}<i className="material-icons right">more_vert</i></span>
         <p className="card__type">{displayType}</p>
         <p className="card__price">{price.finalPrice}</p>
-        <button className="card__button" type="button">Купить</button>
+        <button className="card__button"
+          type="button"
+          onClick={() => addToCart(item)}>Купить</button>
       </div>
       <div className="card-reveal" >
         <div className="card-reveal__wrap" style={cardRevalStyle}>
