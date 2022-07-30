@@ -49,6 +49,38 @@ export const Shop = () => {
     setOrder(newOrder);
   }
 
+  const incQuantity = (itemId) => {
+    const newOrder = order.map(element => {
+      if(element.mainId === itemId) {
+        const newQuantity = element.quantity + 1;
+        return {
+          ...element,
+          quantity: newQuantity,
+        }
+      } else {
+        return element;
+      }
+    });
+
+    setOrder(newOrder);
+  }
+
+  const decQuantity = (itemId) => {
+    const newOrder = order.map(element => {
+      if(element.mainId === itemId) {
+        const newQuantity = element.quantity - 1;
+        return {
+          ...element,
+          quantity: newQuantity >= 0 ? newQuantity : 0,
+        }
+      } else {
+        return element;
+      }
+    });
+
+    setOrder(newOrder);
+  }
+
   useEffect(() => {
     fetch(API_URL, {
       headers: {
@@ -69,7 +101,13 @@ export const Shop = () => {
         loading ? <Preloader /> : <GoodsList goods={goods} addToCart={addToCart}/>
       }
       {
-        isCartShow && <CartList order={order} handleCartShow={handleCartShow} removeFromCart={removeFromCart}/>
+        isCartShow && <CartList
+        order={order}
+        handleCartShow={handleCartShow}
+        removeFromCart={removeFromCart}
+        incQuantity={incQuantity}
+        decQuantity={decQuantity}
+        />
       }
     </section>
   )

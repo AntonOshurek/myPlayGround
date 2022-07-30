@@ -27,6 +27,14 @@
 cursor: pointer;
 }
 
+.cart-item-quantity {
+  cursor: pointer;
+  vertical-align: middle;
+  color: #26a69a;
+  font-size: 30px;
+  font-weight: bold;
+}
+
 @keyframes show {
   from {
     top: 70%;
