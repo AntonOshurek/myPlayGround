@@ -1,4 +1,4 @@
-import { Shop } from './Shop';
+import { Shop } from './shop/Shop';
 
 export const Main = () => {
   return(
