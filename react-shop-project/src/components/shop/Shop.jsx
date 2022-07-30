@@ -44,14 +44,6 @@ export const Shop = () => {
     }
   };
 
-  // useEffect(() => {
-  //   console.log(order)
-  // }, [order])
-
-  // useEffect(() => {
-
-  // }, [isCartShow]);
-
   useEffect(() => {
     fetch(API_URL, {
       headers: {
@@ -72,7 +64,7 @@ export const Shop = () => {
         loading ? <Preloader /> : <GoodsList goods={goods} addToCart={addToCart}/>
       }
       {
-        isCartShow && <CartList order={order}/>
+        isCartShow && <CartList order={order} handleCartShow={handleCartShow}/>
       }
     </section>
   )
