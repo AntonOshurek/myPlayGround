@@ -34,6 +34,15 @@ cursor: pointer;
   font-size: 30px;
   font-weight: bold;
 }
+.cart-list__buy-btn {
+  cursor: pointer;
+  background-color: #26a69a;
+  border: 2px solid #fff;
+  margin-left: 10px;
+  border-radius: 5px;
+  padding: 5px;
+  color: #fff;
+}
 
 @keyframes show {
   from {

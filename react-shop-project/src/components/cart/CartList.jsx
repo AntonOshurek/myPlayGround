@@ -25,7 +25,9 @@ export const CartList = (props) => {
           />
         )) : (<li className="collection-item">Корзина пуста</li>)
       }
-      <li className="collection-item active">Общая стоимость = {totalPrice} руб.</li>
+      <li className="collection-item active">Общая стоимость = {totalPrice} руб.
+        <button className='cart-list__buy-btn'>оформить</button>
+      </li>
       <button className='cart-list__close-btn' onClick={handleCartShow}>
         <i className="material-icons">close</i>
       </button>
