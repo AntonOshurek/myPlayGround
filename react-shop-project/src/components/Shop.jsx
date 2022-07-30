@@ -13,9 +13,31 @@ export const Shop = () => {
   const [order, setOrder] = useState([]);
 
   const addToCart = (item) => {
-    console.log(item);
+    const itemIndex = order.findIndex(orederItem => orederItem.mainId === item.mainId);
 
-    setOrder((prevOrder) => [...prevOrder, item]);
+    if(itemIndex < 0) {
+      const newItem = {
+        ...item,
+        quantity: 1,
+      };
+
+      setOrder((prevOrder) => [...prevOrder, newItem]);
+    } else {
+      const updateOrder = order.map((orderItem, i) => {
+        if(i === itemIndex) {
+          return {
+            ...orderItem,
+            quantity: orderItem.quantity + 1,
+          }
+        } else {
+          return orderItem;
+        }
+      });
+
+      setOrder(updateOrder);
+    }
+
+    console.log(itemIndex);
   };
 
   useEffect(() => {
@@ -37,7 +59,7 @@ export const Shop = () => {
   return(
     <section className="shop container">
       <h2>Магазин</h2>
-      <Cart quantity={order.length}/>
+      <Cart quantity={order.length} />
       {
         loading ? <Preloader /> : <GoodsList goods={goods} addToCart={addToCart}/>
       }

@@ -3,7 +3,7 @@ import './goods-list.css';
 
 export const GoodsList = (props) => {
 
-  const {goods = [], addToCart} = props;
+  const { goods = [], addToCart = Function.prototype } = props;
 
   if(!goods.length) {
     return(

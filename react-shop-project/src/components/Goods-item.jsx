@@ -1,4 +1,6 @@
-export const GoodsItem = ({item, addToCart}) => {
+export const GoodsItem = (props) => {
+
+  const { item = [], addToCart = Function.prototype } = props;
 
   const {
     displayName,
