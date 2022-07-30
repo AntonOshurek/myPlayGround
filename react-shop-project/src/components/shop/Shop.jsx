@@ -44,6 +44,11 @@ export const Shop = () => {
     }
   };
 
+  const removeFromCart = (itemId) => {
+    const newOrder = order.filter(element => element.mainId !== itemId);
+    setOrder(newOrder);
+  }
+
   useEffect(() => {
     fetch(API_URL, {
       headers: {
@@ -64,7 +69,7 @@ export const Shop = () => {
         loading ? <Preloader /> : <GoodsList goods={goods} addToCart={addToCart}/>
       }
       {
-        isCartShow && <CartList order={order} handleCartShow={handleCartShow}/>
+        isCartShow && <CartList order={order} handleCartShow={handleCartShow} removeFromCart={removeFromCart}/>
       }
     </section>
   )
