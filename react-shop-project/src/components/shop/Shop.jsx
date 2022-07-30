@@ -5,6 +5,7 @@ import { GoodsList } from '../goods/Goods-list';
 import { Preloader } from '../Preloader';
 import { Cart } from '../cart/Cart';
 import { CartList } from '../cart/CartList';
+import { Allert } from '../Allert';
 
 import './shop.css';
 
@@ -13,6 +14,7 @@ export const Shop = () => {
   const [loading, setLoading] = useState(true);
   const [order, setOrder] = useState([]);
   const [isCartShow, setCartShow] = useState(false);
+  const [allerName, setAllertName] = useState('');
 
   const handleCartShow = () => {
     setCartShow(!isCartShow);
@@ -39,7 +41,7 @@ export const Shop = () => {
           return orderItem;
         }
       });
-
+      setAllertName(item.displayName);
       setOrder(updateOrder);
     }
   };
@@ -81,6 +83,10 @@ export const Shop = () => {
     setOrder(newOrder);
   }
 
+  const closeAllert = () => {
+    setAllertName('');
+  }
+
   useEffect(() => {
     fetch(API_URL, {
       headers: {
@@ -108,6 +114,9 @@ export const Shop = () => {
         incQuantity={incQuantity}
         decQuantity={decQuantity}
         />
+      }
+      {
+        allerName && <Allert name={allerName} closeAllert={closeAllert}/>
       }
     </section>
   )
