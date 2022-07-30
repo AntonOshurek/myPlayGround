@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
-import {API_KEY, API_URL} from '../config';
+import {API_KEY, API_URL} from '../../config';
 
-import { GoodsList } from './Goods-list';
-import { Preloader } from './Preloader';
-import { Cart } from './Cart';
+import { GoodsList } from '../goods/Goods-list';
+import { Preloader } from '../Preloader';
+import { Cart } from '../cart/Cart';
+import { CartList } from '../cart/CartList';
 
 import './shop.css';
 
@@ -11,6 +12,11 @@ export const Shop = () => {
   const [goods, setGoods] = useState([]);
   const [loading, setLoading] = useState(true);
   const [order, setOrder] = useState([]);
+  const [isCartShow, setCartShow] = useState(false);
+
+  const handleCartShow = () => {
+    setCartShow(!isCartShow);
+  }
 
   const addToCart = (item) => {
     const itemIndex = order.findIndex(orederItem => orederItem.mainId === item.mainId);
@@ -36,13 +42,15 @@ export const Shop = () => {
 
       setOrder(updateOrder);
     }
-
-    console.log(itemIndex);
   };
 
-  useEffect(() => {
-    console.log(order)
-  }, [order])
+  // useEffect(() => {
+  //   console.log(order)
+  // }, [order])
+
+  // useEffect(() => {
+
+  // }, [isCartShow]);
 
   useEffect(() => {
     fetch(API_URL, {
@@ -59,9 +67,12 @@ export const Shop = () => {
   return(
     <section className="shop container">
       <h2>Магазин</h2>
-      <Cart quantity={order.length} />
+      <Cart quantity={order.length} handleCartShow={handleCartShow}/>
       {
         loading ? <Preloader /> : <GoodsList goods={goods} addToCart={addToCart}/>
+      }
+      {
+        isCartShow && <CartList order={order}/>
       }
     </section>
   )
