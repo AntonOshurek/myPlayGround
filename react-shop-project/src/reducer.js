@@ -1,25 +1,30 @@
 export const reducer = (state, {type, payload}) => {
   switch(type) {
 
+    case 'SET_GOODS':
+      return {
+        ...state,
+        goods: payload || [],
+        loading: false,
+      }
+
     case 'REMOVE_FROM_CART':
       return{
         ...state,
         order: state.order.filter(element => element.mainId !== payload.id),
       }
 
-    case 'ADD_TO_CART':
+    case 'ADD_TO_CART': {
       const itemIndex = state.order.findIndex(
-        (orederItem) => orederItem.mainId === payload.mainId
+        orederItem => orederItem.mainId === payload.mainId
       );
-
-        let newOrder = null;
+      let newOrder = null;
 
       if(itemIndex < 0) {
         const newItem = {
           ...payload,
           quantity: 1,
         };
-
         newOrder = [...state.order, newItem];
       } else {
         newOrder = state.order.map((orderItem, i) => {
@@ -31,15 +36,15 @@ export const reducer = (state, {type, payload}) => {
           } else {
             return orderItem;
           }
-        });
+        })
+      };
 
-        return {
-          ...state,
-          order: newOrder,
-          alertName: payload.displayName,
-        }
-      }
-
+      return {
+        ...state,
+        order: newOrder,
+        allertName: payload.displayName,
+      };
+    }
     // eslint-disable-next-line no-fallthrough
     case 'INCREMENT_QUANTITY':
       return {
@@ -82,7 +87,7 @@ export const reducer = (state, {type, payload}) => {
     case 'CLOSE_ALERT':
       return {
         ...state,
-        allerName: '',
+        allertName: '',
       }
 
     default:

@@ -1,6 +1,8 @@
-export const GoodsItem = (props) => {
+import { useContext } from 'react';
+import { ShopContext } from '../../context';
 
-  const { item = [], addToCart = Function.prototype } = props;
+export const GoodsItem = (props) => {
+  const { item = [] } = props;
 
   const {
     displayName,
@@ -9,6 +11,8 @@ export const GoodsItem = (props) => {
     price,
     displayAssets,
   } = item;
+
+  const {addToCart} = useContext(ShopContext);
 
   const cardRevalStyle = {
     backgroundImage: `url("${ displayAssets[0].background }")`,

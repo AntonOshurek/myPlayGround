@@ -8,13 +8,13 @@ const initialState = {
   loading: true,
   order: [],
   isCartShow: false,
-  allerName: '',
+  allertName: '',
 }
 
 export const ContextProvider = ({children}) => {
   const [value, dispatch] = useReducer(reducer, initialState);
 
-  value.closeAlert = () => {
+  value.closeAllert = () => {
     dispatch({type: 'CLOSE_ALERT'});
   }
 
@@ -36,6 +36,10 @@ export const ContextProvider = ({children}) => {
 
   value.handleCartShow = () => {
     dispatch({type: 'TOOGLE_BASCET'});
+  }
+
+  value.setGoods = (data) => {
+    dispatch({type: 'SET_GOODS', payload: data});
   }
 
   return(

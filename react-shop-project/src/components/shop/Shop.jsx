@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import {API_KEY, API_URL} from '../../config';
 
 import { GoodsList } from '../goods/Goods-list';
@@ -9,83 +9,11 @@ import { Allert } from '../Allert';
 
 import './shop.css';
 
+import { ShopContext } from '../../context';
+
 export const Shop = () => {
-  const [goods, setGoods] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [order, setOrder] = useState([]);
-  const [isCartShow, setCartShow] = useState(false);
-  const [allerName, setAllertName] = useState('');
 
-  const handleCartShow = () => {
-    setCartShow(!isCartShow);
-  }
-
-  const addToCart = (item) => {
-    const itemIndex = order.findIndex(orederItem => orederItem.mainId === item.mainId);
-
-    if(itemIndex < 0) {
-      const newItem = {
-        ...item,
-        quantity: 1,
-      };
-
-      setOrder((prevOrder) => [...prevOrder, newItem]);
-    } else {
-      const updateOrder = order.map((orderItem, i) => {
-        if(i === itemIndex) {
-          return {
-            ...orderItem,
-            quantity: orderItem.quantity + 1,
-          }
-        } else {
-          return orderItem;
-        }
-      });
-      setAllertName(item.displayName);
-      setOrder(updateOrder);
-    }
-  };
-
-  const removeFromCart = (itemId) => {
-    const newOrder = order.filter(element => element.mainId !== itemId);
-    setOrder(newOrder);
-  }
-
-  const incQuantity = (itemId) => {
-    const newOrder = order.map(element => {
-      if(element.mainId === itemId) {
-        const newQuantity = element.quantity + 1;
-        return {
-          ...element,
-          quantity: newQuantity,
-        }
-      } else {
-        return element;
-      }
-    });
-
-    setOrder(newOrder);
-  }
-
-  const decQuantity = (itemId) => {
-    const newOrder = order.map(element => {
-      if(element.mainId === itemId) {
-        const newQuantity = element.quantity - 1;
-        return {
-          ...element,
-          quantity: newQuantity >= 0 ? newQuantity : 0,
-        }
-      } else {
-        return element;
-      }
-    });
-
-    setOrder(newOrder);
-  }
-
-  const closeAllert = () => {
-    setAllertName('');
-  }
+  const {goods, setGoods, loading, order, isCartShow, allertName} = useContext(ShopContext);
 
   useEffect(() => {
     fetch(API_URL, {
@@ -95,28 +23,22 @@ export const Shop = () => {
     }).then(response => response.json())
     .then((data) => {
       setGoods(data.shop);
-      setLoading(false);
     })
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return(
     <section className="shop container">
       <h2>Магазин</h2>
-      <Cart quantity={order.length} handleCartShow={handleCartShow}/>
+      <Cart quantity={order.length}/>
       {
-        loading ? <Preloader /> : <GoodsList goods={goods} addToCart={addToCart}/>
+        loading ? <Preloader /> : <GoodsList goods={goods}/>
       }
       {
-        isCartShow && <CartList
-        order={order}
-        handleCartShow={handleCartShow}
-        removeFromCart={removeFromCart}
-        incQuantity={incQuantity}
-        decQuantity={decQuantity}
-        />
+        isCartShow && <CartList/>
       }
       {
-        allerName && <Allert name={allerName} closeAllert={closeAllert}/>
+        allertName && <Allert name={allertName}/>
       }
     </section>
   )
