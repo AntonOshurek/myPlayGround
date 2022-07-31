@@ -22,6 +22,22 @@ export const ContextProvider = ({children}) => {
     dispatch({type: 'REMOVE_FROM_CART', payload: {id: itemId}});
   }
 
+  value.addToCart = (item) => {
+    dispatch({type: 'ADD_TO_CART', payload: item});
+  }
+
+  value.incQuantity = (itemId) => {
+    dispatch({type: 'INCREMENT_QUANTITY', payload: {id: itemId}});
+  }
+
+  value.decQuantity = (itemId) => {
+    dispatch({type: 'DECREMENT_QUANTITY', payload: {id: itemId}});
+  }
+
+  value.handleCartShow = () => {
+    dispatch({type: 'TOOGLE_BASCET'});
+  }
+
   return(
     <ShopContext.Provider value={value}>
       {children}
