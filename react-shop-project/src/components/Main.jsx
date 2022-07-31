@@ -1,9 +1,13 @@
 import { Shop } from './shop/Shop';
 
+import {ContextProvider} from '../context';
+
 export const Main = () => {
   return(
     <main>
-      <Shop />
+      <ContextProvider>
+        <Shop />
+      </ContextProvider>
     </main>
   );
 };
