@@ -3,11 +3,7 @@ import { connect } from "react-redux/es/exports";
 import {inc, dec} from '../store/actions';
 // import { bindActionCreators } from "redux";
 
-const Counter = ({
-  counter,
-  inc = Function.prototype,
-  dec = Function.prototype
-  }) => {
+const Counter = ({counter, inc = Function.prototype, dec = Function.prototype}) => {
   return(
     <>
       <h1>{counter} - count</h1>
