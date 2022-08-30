@@ -2,21 +2,36 @@ import { connect } from "react-redux/es/exports";
 import {inc, dec} from '../store/actions';
 
 import { bindActionCreators } from "redux";
+import { useSelector, useDispatch } from "react-redux/es/exports";
 
-const Counter = ({counter, title, inc, dec}) => {
+const Counter = () => {
+  const {value: counter, title} = useSelector(state => state);
+  const dispatch = useDispatch();
+
   return(
     <>
       <h1>{counter} - {title}</h1>
-      <button onClick={dec}>dec</button>
-      <button onClick={inc}>inc</button>
+      <button onClick={() => dispatch(dec())}>dec</button>
+      <button onClick={() => dispatch(inc())}>inc</button>
     </>
   );
 };
 
-const mapStateToProps = (state) => ({
-  counter: state.value,
-  title: state.title,
-});
+// для работы с connect
+// const Counter = ({counter, title, inc, dec}) => {
+//   return(
+//     <>
+//       <h1>{counter} - {title}</h1>
+//       <button onClick={dec}>dec</button>
+//       <button onClick={inc}>inc</button>
+//     </>
+//   );
+// };
+
+// const mapStateToProps = (state) => ({
+//   counter: state.value,
+//   title: state.title,
+// });
 
 //вариант с добавлением конекста к действиям
 // const mapDispatchToPropsFOO = (dispatch) => bindActionCreators({
@@ -44,12 +59,14 @@ const mapStateToProps = (state) => ({
 //   }
 // };
 // такой же вариант только чуть проше в написании
-const mapDispatchToProps = (dispatch) => bindActionCreators({
-  inc,
-  dec,
-}, dispatch);
+// const mapDispatchToProps = (dispatch) => bindActionCreators({
+//   inc,
+//   dec,
+// }, dispatch);
 
 // вариант без mapDispatchToProps
 // функция connect биндит функции автоматически если передать в неё объект!
 // export default connect(mapStateToProps, {inc, dec})(Counter);
-export default connect(mapStateToProps, mapDispatchToProps)(Counter);
+// export default connect(mapStateToProps, mapDispatchToProps)(Counter);
+
+export default Counter;
