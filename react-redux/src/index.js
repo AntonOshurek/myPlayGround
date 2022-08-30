@@ -4,11 +4,11 @@ import './index.css';
 import App from './components/App';
 
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
+import { configureStore } from '@reduxjs/toolkit'
 
 import reducer from './store/reducer';
-//создали хранилище
-const store = createStore(reducer);
+//создали хранилище с редюсером
+const store = configureStore({reducer: reducer});
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
