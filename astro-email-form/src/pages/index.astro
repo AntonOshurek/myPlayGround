@@ -1,0 +1,150 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Welcome to Astro.">
+	<main>
+		
+		<h1>Welcome to <span class="text-gradient">Astro email sender</span></h1>
+
+
+		<form class="contact-form" method="POST">
+			<label class="contact-form__label" for="name">
+				<span class="contact-form__input-title">
+					Name:
+				</span>
+				<input class="contact-form__input" type="text" id="name" name="name" required>
+
+			</label>
+			
+			<label class="contact-form__label" for="email">
+				<span class="contact-form__input-title">
+					Email:
+				</span>
+				<input class="contact-form__input" type="email" id="email" name="email" required>
+			</label>
+			
+			<label class="contact-form__label" for="message">
+				<span class="contact-form__input-title">
+					Message:
+				</span>
+				<textarea class="contact-form__text" id="message" name="message" rows="10" cols="50" required></textarea>
+			</label>
+			
+			<button class="contact-form__submit" type="submit">Send</button>
+		</form>
+
+	</main>
+</Layout>
+
+<script>
+	
+	const email = () => {
+		const form = document.querySelector('.contact-form');
+		if (!form) {
+			console.error('Form element not found');
+			return;
+		}
+
+		form.addEventListener('submit', async (event: Event) => {
+			event.preventDefault();
+
+			const formData = new FormData(form as HTMLFormElement);
+
+            // fetch('send-email.php', {
+            //     method: 'POST',
+            //     body: formData
+            // })
+            // .then(response => response.json())
+            // .then(data => {
+            //     console.log(data.message);
+            // })
+            // .catch(error => {
+            //     console.error('Error:', error);
+            // });
+
+			const response = await fetch('./send-email.php', {
+				method: 'POST',
+				body: formData,
+			});
+
+			console.log('response.status - ' + response.status)
+
+			if(response.status === 200) {
+				alert('Email sent successfully!');
+			} else {
+				alert('Failed to send email with status: ' + response.status);
+			}
+		});
+	}
+
+  window.addEventListener('DOMContentLoaded', () => {
+    email();
+  });
+</script>
+
+<style>
+
+	.contact-form {
+		display: grid;
+		grid-template-columns: 1fr;
+		width: max-content;
+		max-height: max-content;
+		height: max-content;
+		justify-self: center;
+		gap: 20px;
+	}
+	.contact-form__label {
+		display: grid;
+		grid-template-columns: max-content 1fr;
+		gap: 10px;
+	}
+
+	.contact-form__input {
+		padding: 8px 12px;
+		border-radius: 10px;
+	}
+
+	.contact-form__input-title {
+
+	}
+
+	.contact-form__text {
+	}
+
+	.contact-form__submit {
+		background-image: var(--accent-gradient);
+		border: 1px solid var(--accent);
+		border-radius: 10px;
+		padding: 10px;
+		cursor: pointer;
+	}
+
+	main {
+		margin: auto;
+		padding: 1rem;
+		color: white;
+		font-size: 20px;
+		line-height: 1.6;
+		min-height: 100vh;
+		display: grid;
+		grid-template-columns: 1fr;
+		grid-template-rows: max-content 1fr;
+	}
+
+	h1 {
+		font-size: 4rem;
+		font-weight: 700;
+		line-height: 1;
+		text-align: center;
+		margin-bottom: 1em;
+	}
+
+	.text-gradient {
+		background-image: var(--accent-gradient);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		background-size: 400%;
+		background-position: 0%;
+	}
+</style>
